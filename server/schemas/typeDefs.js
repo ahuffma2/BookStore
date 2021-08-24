@@ -1,8 +1,5 @@
 const {gql} = require('apollo-server-express');
 
-//TODO
-//figure out saveBook mutation
-//and input types??? 
 const typeDefs = gql`
     type User {
       _id: ID
@@ -31,7 +28,7 @@ const typeDefs = gql`
         title: String
         bookId: String
         image: String
-        ling: String
+        link: String
         authors: [String]
     }
 
