@@ -11,7 +11,7 @@ const resolvers = {
 
         //Adds an individual user and signs a token to that new user
         addUser: async(parent, args) => {
-            const user = await User.create(...args);
+            const user = await User.create(args);
             const token = signToken(user);
             return {token,user};
         },
@@ -30,7 +30,24 @@ const resolvers = {
 
             const token = signToken(user);
             return {token,user};
+        },
 
+        //under construction
+        saveBook: async(parent, {content} , context) => {
+            if(context.user) {
+                return updatedUser.findOneAndUpdate(
+                    {_id: context.user._id},
+                    {$pull: {savedBooks: {content}}},
+                    {new: true}
+                )
+            }
+
+            throw new AuthenticationError('Error')
+
+        },
+        
+        removeBook: async (parent, {} ) => {
+            return;
         }
     }
 }
