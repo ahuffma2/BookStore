@@ -1,4 +1,4 @@
-const {Book,User} = require('../models');
+const {User} = require('../models');
 const {AuthenticationError} = require ('apollo-server-express');
 const {signToken} = require('../utils/auth');
 
@@ -32,10 +32,12 @@ const resolvers = {
             return {token,user};
         },
 
-        //under construction
+        //using InputBook content to save a new book to the savedBooks array
         saveBook: async(parent, {content} , context) => {
             if(context.user) {
-                return updatedUser.findOneAndUpdate(
+
+                //THIS WILL TROW AN ERROR
+                return Book.findOneAndUpdate(
                     {_id: context.user._id},
                     {$pull: {savedBooks: {content}}},
                     {new: true}
@@ -45,9 +47,12 @@ const resolvers = {
             throw new AuthenticationError('Error')
 
         },
-        
-        removeBook: async (parent, {} ) => {
-            return;
+
+
+        //Path for removing book by a specified ID
+        removeBook: async (parent, {bookId}, context ) => {
+          if(context.user)
+            return Book.findOneAndUpdate
         }
     }
 }
