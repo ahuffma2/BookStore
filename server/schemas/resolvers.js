@@ -37,14 +37,13 @@ const resolvers = {
             return {token,user};
         },
 
-        //using InputBook content to save a new book to the savedBooks array
-        saveBook: async(parent, {content} , context) => {
+        saveBook: async(parent, {bookId} , context) => {
             if(context.user) {
-
+                console.log('im hitting resolvers');
                 //THIS WILL TROW AN ERROR
-                return Book.findOneAndUpdate(
+                return await User.findOneAndUpdate(
                     {_id: context.user._id},
-                    {$pull: {savedBooks: {content}}},
+                    {$pull: {savedBooks: {bookId}}},
                     {new: true}
                 )
             }
@@ -53,11 +52,14 @@ const resolvers = {
 
         },
 
-
         //Path for removing book by a specified ID
         removeBook: async (parent, {bookId}, context ) => {
           if(context.user)
-            return Book.findOneAndUpdate
+            return Book.findOneAndUpdate(      
+                {_id: context.user._id},
+                {$pull: {savedBooks: {bookId}}},
+                {new: true}
+            )
         }
     }
 }
