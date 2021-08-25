@@ -7,8 +7,6 @@ import Auth from '../utils/auth';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 import { SAVE_BOOK } from '../utils/mutations';
-import { resetComments } from '../../../server/node_modules/@graphql-tools/utils';
-
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -39,7 +37,7 @@ const SearchBooks = () => {
       //const response = await searchGoogleBooks(searchInput);
       const res = await fetch (`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`);
 
-      if (!resetComments.ok) {
+      if (!res.ok) {
         throw new Error('something went wrong!');
       }
 
