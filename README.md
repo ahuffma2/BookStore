@@ -1,5 +1,5 @@
 
-# Austin Huffman React Portfolio
+# Book Store
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
    Need a book? Sign Up, Log In, and we've got it! 
    
